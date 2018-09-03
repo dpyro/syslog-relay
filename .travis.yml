@@ -16,7 +16,8 @@ script:
   - docker service logs test_sink 2>&1 | grep "Foobar McBarfoo" /dev/stdin
 
 after_failure:
-  - docker service logs
+  - docker service logs test_relay
+  - docker service logs test_sink
 
 after_script:
   - docker stack rm test
