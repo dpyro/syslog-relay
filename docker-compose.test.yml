@@ -1,0 +1,23 @@
+version: "3.0"
+
+services:
+  relay:
+    image: dpyro/syslog-relay
+    environment:
+      RELAY_TARGET: "@@sink:514"
+    ports:
+      - "514:514/tcp"
+    networks:
+      - default
+      - relay_test
+
+  sink:
+    image: dpyro/syslog-relay
+    environment:
+      RELAY_TARGET: "@@nowhere"
+    networks:
+      - relay_test
+
+networks:
+  relay_test:
+    internal: true

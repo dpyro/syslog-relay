@@ -1,0 +1,16 @@
+sudo: required
+
+services:
+  docker
+
+before_script:
+  - docker build -t dpyro/syslog-relay .
+  - docker stack deploy -c docker-compose.test.yml test
+
+script:
+  - logger -n localhost -P 514 -p local0.debug -t test -sT "Foobar McBarfoo
+  - docker service logs test_relay 2>&1 | grep "Foobar McBarfoo" /dev/stdin
+  - docker service logs test_sink 2>&1 | grep "Foobar McBarfoo" /dev/stdin
+
+after_script:
+  - docker stack rm test
