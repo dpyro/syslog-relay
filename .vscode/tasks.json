@@ -1,0 +1,40 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "image",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "type": "process",
+            "command": "docker",
+            "args": [
+                "build",
+                "-t",
+                "dpyro/rsyslog-relay",
+                "."
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "run",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "type": "process",
+            "command": "docker",
+            "args": [
+                "run", "--rm", "-it",
+                "-p", "514:514",
+                "-p", "514:514/udp",
+                "-p", "6514:6514",
+                "dpyro/rsyslog-relay",
+            ],
+            "problemMatcher": []
+        }
+    ]
+}
