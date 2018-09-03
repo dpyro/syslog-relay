@@ -11,8 +11,9 @@ before_script:
   - docker stack deploy -c docker-compose.test.yml test
 
 script:
+  - sleep 10
   - docker run --rm buildpack-deps logger -n localhost -P 514 -p local0.debug -t test -sT "Foobar McBarfoo"
-  - sleep 5
+  - sleep 10
   - docker service logs test_relay 2>&1 | grep "Foobar McBarfoo" /dev/stdin
   - docker service logs test_sink 2>&1 | grep "Foobar McBarfoo" /dev/stdin
 
