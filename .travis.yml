@@ -9,7 +9,7 @@ before_script:
   - docker stack deploy -c docker-compose.test.yml test
 
 script:
-  - logger -n localhost -P 514 -p local0.debug -t test -sT "Foobar McBarfoo"
+  - logger -n localhost -P 514 -p local0.debug -t test -s "Foobar McBarfoo"
   - docker service logs test_relay 2>&1 | grep "Foobar McBarfoo" /dev/stdin
   - docker service logs test_sink 2>&1 | grep "Foobar McBarfoo" /dev/stdin
 
