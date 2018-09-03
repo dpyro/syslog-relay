@@ -5,6 +5,7 @@ services:
 
 before_script:
   - docker build -t dpyro/syslog-relay .
+  - docker swarm init
   - docker stack deploy -c docker-compose.test.yml test
 
 script:
