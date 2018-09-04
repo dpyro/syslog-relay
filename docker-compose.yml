@@ -3,16 +3,12 @@ version: "3.0"
 
 services:
   relay:
-    image: dpyro/syslog-relay
-    environment:
-      RELAY_TARGET: "@@sink:514"
+    image: dpyro/syslog-relay @@sink:514
     ports:
       - "514:514/tcp"
 
   sink:
     image: dpyro/syslog-relay
-    environment:
-      RELAY_TARGET: "@nowhere"
 
   logger:
     image: buildpack-deps

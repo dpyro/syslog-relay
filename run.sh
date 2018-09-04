@@ -36,7 +36,6 @@ export QUIET=''
 
 while getopts 'h?q' c
 do
-  # echo "Optloop: c=$c OPTIND=$OPTIND OPTARG=$OPTARG"
   case $c in
     q) QUIET=true ;;
     h|?|*) usage ;;
