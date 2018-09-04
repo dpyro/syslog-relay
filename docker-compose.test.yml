@@ -5,6 +5,8 @@ services:
     image: dpyro/syslog-relay
     environment:
       RELAY_TARGET: "@@sink:514"
+    ports:
+      - "514:514/tcp"
 
   sink:
     image: dpyro/syslog-relay
