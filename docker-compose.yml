@@ -3,7 +3,8 @@ version: "3.0"
 
 services:
   relay:
-    image: dpyro/syslog-relay @@sink:514
+    image: dpyro/syslog-relay
+    command: "@@sink:514"
     ports:
       - "514:514/tcp"
 
