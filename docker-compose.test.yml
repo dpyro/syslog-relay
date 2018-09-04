@@ -5,19 +5,15 @@ services:
     image: dpyro/syslog-relay
     environment:
       RELAY_TARGET: "@@sink:514"
-    ports:
-      - "514:514/tcp"
-    networks:
-      - default
-      - relay_test
 
   sink:
     image: dpyro/syslog-relay
     environment:
-      RELAY_TARGET: "@@nowhere"
-    networks:
-      - relay_test
+      RELAY_TARGET: "@nowhere"
 
-networks:
-  relay_test:
-    internal: true
+  logger:
+    image: buildpack-deps
+    command: logger -n relay -P 514 -p local0.debug -t test -sT "Foobar McBarfoo"
+    deploy:
+      restart_policy:
+        delay: 60s
