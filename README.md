@@ -10,7 +10,7 @@
 | 514  | TCP  |
 | 6514 | RELP |
 
-You must set `$RELAY_TARGET` to relay to a custom endpoint. The default is `tcp://localhost:514`.
+Specify the relay endpoint with the first argument. Using `@localhost:514` will probably cause an infinite loop.
 
 ## Outputs
 
@@ -22,17 +22,19 @@ You must set `$RELAY_TARGET` to relay to a custom endpoint. The default is `tcp:
 ### UDP input, UDP output
 
 ```sh
-docker run -p 514:514/udp -e RELAY_TARGET='@nowhere' dpyro/rsyslog-relay
+docker run -p 514:514/udp dpyro/rsyslog-relay @nowhere
 ```
 
 ### TCP input, TCP output
 
 ```sh
-docker run -p 514:514/tcp -e RELAY_TARGET='@@nowhere' dpyro/rsyslog-relay
+docker run -p 514:514/tcp dpyro/rsyslog-relay @@nowhere
 ```
+
+Note the two `@@`.
 
 ### TCP input, Telegraf syslog output
 
 ```sh
-docker run -p 514:514/tcp -e RELAY_TARGET='@@(o)nowhere:6514;RSYSLOG_SyslogProtocol23Format' dpyro/rsyslog-relay
+docker run -p 514:514/tcp dpyro/rsyslog-relay '@@(o)nowhere:6514;RSYSLOG_SyslogProtocol23Format'
 ```

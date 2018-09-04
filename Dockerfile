@@ -13,7 +13,6 @@ RUN	yum -y install \
 
 WORKDIR /root
 
-ENV RELAY_TARGET=@localhost
 COPY run.sh /root/run.sh
 RUN chmod +x /root/run.sh
 
@@ -29,4 +28,4 @@ EXPOSE 6514/tcp
 
 VOLUME [ "/var/log" ]
 
-ENTRYPOINT [ "/root/run.sh", "-n" ]
+ENTRYPOINT [ "/root/run.sh" ]

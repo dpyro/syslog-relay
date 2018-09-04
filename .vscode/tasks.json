@@ -14,7 +14,7 @@
             "args": [
                 "build",
                 "-t",
-                "dpyro/rsyslog-relay",
+                "dpyro/syslog-relay",
                 "."
             ],
             "problemMatcher": []
@@ -28,9 +28,9 @@
             "type": "process",
             "command": "docker",
             "args": [
-                "run", "--rm", "-it",
+                "run", "--rm",
                 "-p", "514:514",
-                "-p", "514:514/udp",
+                "-p", "515:514/udp",
                 "-p", "6514:6514",
                 "dpyro/rsyslog-relay",
             ],
