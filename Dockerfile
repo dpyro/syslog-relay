@@ -29,6 +29,4 @@ EXPOSE 6514/tcp
 
 VOLUME [ "/var/log" ]
 
-# Based on https://github.com/voxxit/dockerfiles/blob/master/rsyslog/Dockerfile
-
 ENTRYPOINT [ "/root/run.sh", "-n" ]
