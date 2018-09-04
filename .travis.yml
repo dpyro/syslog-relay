@@ -9,9 +9,9 @@ before_script:
   - docker build -t dpyro/syslog-relay .
   - docker swarm init
   - docker stack deploy -c docker-compose.test.yml test
+  - sleep 5
 
 script:
-  - sleep 5
   - docker service logs test_relay 2>&1 | grep "Foobar McBarfoo" /dev/stdin
   - docker service logs test_sink 2>&1 | grep "Foobar McBarfoo" /dev/stdin
 
