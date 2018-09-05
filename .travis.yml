@@ -6,7 +6,7 @@ services:
   docker
 
 before_script:
-  - docker-compose up --build --detach 2>&1 > output
+  - docker-compose up --build --detach
   - sleep 30
 
 script:
