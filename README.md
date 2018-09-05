@@ -15,20 +15,28 @@ Specify the relay endpoint with the first argument. Using `@localhost:514` will 
 ## Outputs
 
 * `$RELAY_TARGET` syslog string
-* `stdout`/`stderr` echoing relayed messages
+* __stdout__/__stderr__ echoing relayed messages
 
 ## Examples
 
-### UDP input, UDP output
+### Log file input, UDP output
 
 ```sh
-docker run -p 514:514/udp dpyro/rsyslog-relay @nowhere
+docker run -v source:/logs dpyro/syslog-relay @nowhere
+```
+
+Where source is a folder or a volume containing top-level log files.
+
+### UDP input, UDP output to a specified port
+
+```sh
+docker run -p 514:514/udp dpyro/syslog-relay @nowhere:8675
 ```
 
 ### TCP input, TCP output
 
 ```sh
-docker run -p 514:514/tcp dpyro/rsyslog-relay @@nowhere
+docker run -p 514:514/tcp dpyro/syslog-relay @@nowhere
 ```
 
 Note the two `@@`.

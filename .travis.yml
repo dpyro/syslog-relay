@@ -6,18 +6,17 @@ services:
   docker
 
 before_script:
-  - docker build -t dpyro/syslog-relay .
-  - docker swarm init
-  - docker stack deploy -c docker-compose.yml test
+  - docker-compose up --build --detach 2>&1 > output
   - sleep 30
 
 script:
-  - docker service logs test_relay 2>&1 | grep "Foobar McBarfoo" /dev/stdin
-  - docker service logs test_sink 2>&1 | grep "Foobar McBarfoo" /dev/stdin
+  - docker-compose logs --no-color | grep "^relay" | grep "File Output" /dev/stdin
+  - docker-compose logs --no-color | grep "^sink"  | grep "File Output" /dev/stdin
+  - docker-compose logs --no-color | grep "^relay" | grep "Network Output" /dev/stdin
+  - docker-compose logs --no-color | grep "^sink"  | grep "Network Output" /dev/stdin
 
 after_failure:
-  - docker service logs test_relay
-  - docker service logs test_sink
+  - docker-compose logs
 
 after_script:
-  - docker stack rm test
+  - docker-compose down

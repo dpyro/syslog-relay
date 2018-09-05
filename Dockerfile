@@ -16,6 +16,7 @@ WORKDIR /root
 COPY run.sh /root/run.sh
 RUN chmod +x /root/run.sh
 
+RUN mkdir /logs
 RUN mkdir -p /var/spool/rsyslog
 COPY rsyslog.conf /etc/rsyslog.conf
 
@@ -26,6 +27,6 @@ EXPOSE 514/tcp
 # RELP syslog reciever
 EXPOSE 6514/tcp
 
-VOLUME [ "/var/log" ]
+VOLUME [ "/logs" ]
 
 ENTRYPOINT [ "/root/run.sh" ]

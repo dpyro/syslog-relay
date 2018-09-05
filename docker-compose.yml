@@ -1,19 +1,35 @@
 # Use for testing
-version: "3.0"
+version: "2.0"
 
 services:
+  sink:
+    build: .
+
   relay:
-    image: dpyro/syslog-relay
+    build: .
     command: "@@sink:514"
     ports:
       - "514:514/tcp"
+    volumes:
+      - "logs:/logs:ro"
+    depends_on:
+      - sink
 
-  sink:
-    image: dpyro/syslog-relay
+  source:
+    image: alpine
+    command: /bin/sh -c 'mkdir -p /logs && echo "File Output" >> /logs/test.log'
+    volumes:
+      - "logs:/logs"
+    restart: always
+    depends_on:
+      - relay
 
   logger:
     image: buildpack-deps
-    command: logger -n relay -P 514 -p local0.debug -t test -sT "Foobar McBarfoo"
-    deploy:
-      restart_policy:
-        delay: 5s
+    command: logger -n relay -P 514 -p local0.debug -t test -sT "Network Output"
+    restart: always
+    depends_on:
+      - relay
+
+volumes:
+  logs:
