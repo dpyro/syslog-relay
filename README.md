@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/dpyro/syslog-relay.svg?branch=master)](https://travis-ci.org/dpyro/syslog-relay)
 
+Relay to a syslog endpoint using rsyslog.
+
 ## Inputs
 
 ### Filesystem
@@ -9,8 +11,14 @@
 Bind a log output to `/logs`. For example,
 
 ```sh
-docker run -v /my/log/ouput.log:/logs:ro dpyro/syslog-relay
+docker run -v /my/log/ouput.log:/logs dpyro/syslog-relay
 ```
+
+```sh
+docker run -v log_volume:/logs dpyro/syslog-relay
+```
+
+Note that a `_work` directory will be created in the volume by rsyslog  to keep track of log position.
 
 ### Network
 
