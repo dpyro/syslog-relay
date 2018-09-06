@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
+docker version
+docker-compose version
 docker-compose config --quiet
-docker-compose up --build --detach
-sleep 30
+exec docker-compose up --build --detach

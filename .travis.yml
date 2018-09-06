@@ -1,4 +1,4 @@
-sudo: required
+sudo: false
 
 language: minimal
 
@@ -13,6 +13,7 @@ before_script:
   - sudo apt-get -y install docker-ce
 
   - ./test_setup.sh
+  - sleep 30
 
 script:
   - docker-compose logs --no-color | grep "^relay" | grep "File Output" /dev/stdin
