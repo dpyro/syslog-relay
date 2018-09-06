@@ -5,10 +5,8 @@ language: minimal
 services:
   docker
 
-addons:
-  apt:
-    packages:
-      - docker-ce
+env:
+  - DOCKER_COMPOSE_VERSION=17.12.0
 
 before_script:
   - docker-compose config --quiet
