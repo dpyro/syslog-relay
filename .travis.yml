@@ -16,10 +16,10 @@ before_script:
   - sudo apt-get -y install docker-ce
 
   - docker-compose config --quiet
+  - docker-compose up --build --detach
+  - sleep 30
 
 script:
-  - /bin/sh -c 'docker-compose up --build --detach'
-  - sleep 30
   - docker-compose logs --no-color | grep "^relay" | grep "File Output" /dev/stdin
   - docker-compose logs --no-color | grep "^sink"  | grep "File Output" /dev/stdin
   - docker-compose logs --no-color | grep "^relay" | grep "Network Output" /dev/stdin
