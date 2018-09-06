@@ -18,7 +18,7 @@ before_script:
   - docker-compose config --quiet
 
 script:
-  - 'docker-compose up --build --detach'
+  - /bin/sh -c 'docker-compose up --build --detach'
   - sleep 30
   - docker-compose logs --no-color | grep "^relay" | grep "File Output" /dev/stdin
   - docker-compose logs --no-color | grep "^sink"  | grep "File Output" /dev/stdin
