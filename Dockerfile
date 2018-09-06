@@ -18,7 +18,6 @@ RUN chmod +x /root/run.sh
 
 RUN mkdir /logs
 RUN mkdir /logs/_work
-RUN mkdir -p /var/spool/rsyslog
 COPY rsyslog.conf /etc/rsyslog.conf
 
 # traditional syslog reciever UDP
