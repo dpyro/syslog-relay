@@ -5,6 +5,9 @@ language: minimal
 services:
   docker
 
+env:
+  - DOCKER_COMPOSE_VERSION=1.22.0
+
 before_script:
   # https://docs.travis-ci.com/user/docker/#installing-a-newer-docker-version
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -12,7 +15,16 @@ before_script:
   - sudo apt-get update
   - sudo apt-get -y install docker-ce
 
-  - ./test_setup.sh
+  # https://docs.travis-ci.com/user/docker/#using-docker-compose
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+  - docker version
+  - docker-compose version
+  - docker-compose config --quiet
+  - docker-compose up --build --detach
   - sleep 30
 
 script:
