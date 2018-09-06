@@ -4,6 +4,16 @@
 
 ## Inputs
 
+### Filesystem
+
+Bind a log output to `/logs`. For example,
+
+```sh
+docker run -v /my/log/ouput.log:/logs:ro dpyro/syslog-relay
+```
+
+### Network
+
 | Port | Name |
 |------|------|
 | 514  | UDP  |
