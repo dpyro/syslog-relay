@@ -11,7 +11,7 @@ services:
     ports:
       - "514:514/tcp"
     volumes:
-      - "logs:/logs:ro"
+      - "logs:/logs"
     depends_on:
       - sink
 
