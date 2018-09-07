@@ -10,7 +10,7 @@ generate_script() {
 
   if [ -n "$SYSLOG_TARGET" ]; then
     script_target=$(cat <<-EOF
-			\$WorkDirectory /var/spool/rsyslog
+			\$WorkDirectory /logs/_work
 			\$ActionQueueType LinkedList   			# use asynchronous processing
 			\$ActionQueueFileName srvrfwd  			# set file name, also enables disk mode
 			\$ActionResumeRetryCount 1     			# retries on insert failure
