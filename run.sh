@@ -6,15 +6,7 @@ usage() {
 }
 
 generate_script() {
-	local script_stdout=''
 	local script_target=''
-
-  if [ -z "$QUIET" ]; then
-    script_stdout=$(cat <<-EOF
-			action(type="omstdout")
-		EOF
-		)
-  fi
 
   if [ -n "$SYSLOG_TARGET" ]; then
     script_target=$(cat <<-EOF
@@ -28,16 +20,15 @@ generate_script() {
 		)
   fi
 
-  printf '%s\n\n%s' "$script_stdout" "$script_target"
+  printf '%s\n' "$script_target"
 }
 
 export SYSLOG_TARGET=''
 export QUIET=''
 
-while getopts 'h?q' c
+while getopts 'h?' c
 do
   case $c in
-    q) QUIET=true ;;
     h|?|*) usage ;;
   esac
 done

@@ -29,8 +29,8 @@
             "command": "docker",
             "args": [
                 "run", "--rm",
-                "-p", "514:514",
                 "-p", "515:514/udp",
+                "-p", "514:514/tcp",
                 "-p", "6514:6514",
                 "dpyro/rsyslog-relay",
             ],

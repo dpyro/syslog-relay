@@ -25,8 +25,8 @@ services:
       - relay
 
   logger:
-    image: buildpack-deps
-    command: logger -n relay -P 514 -p local0.debug -t test -sT "Network Output"
+    image: alpine
+    command: echo "Network Output" | nc relay 514
     restart: always
     depends_on:
       - relay
