@@ -15,18 +15,18 @@ services:
     depends_on:
       - sink
 
-  source:
+  file_source:
     image: alpine
-    command: /bin/sh -c 'mkdir -p /logs && echo "File Output" >> /logs/test.log'
+    command: /bin/sh -c 'mkdir -p /logs && echo "File Output" >> /logs/test.log; sleep 5'
     volumes:
       - "logs:/logs"
     restart: always
     depends_on:
       - relay
 
-  logger:
-    image: alpine
-    command: echo "Network Output" | nc relay 514
+  tcp_source:
+    image: buildpack-deps
+    command: logger -n relay -P 514 -p local0.debug -t test -sT "Network Output"
     restart: always
     depends_on:
       - relay
